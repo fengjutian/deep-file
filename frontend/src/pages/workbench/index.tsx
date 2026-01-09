@@ -12,9 +12,9 @@ import '@xyflow/react/dist/style.css';
 import { useCallback, useState } from 'react';
 
 const initialNodes = [
-  { id: 'n1', position: { x: 0, y: 0 }, data: { label: 'Node 1' }, type: 'input' },
-  { id: 'n2', position: { x: 0, y: 100 }, data: { label: 'Node 2' } },
-  { id: 'n3', position: { x: 0, y: 200 }, data: { label: 'Node 3' }, type: 'output' },
+  { id: 'n1', position: { x: 0, y: 0 }, data: { label: 'Node 1 - Updated' }, type: 'input',  style: { backgroundColor: '#6ede87', color: 'white' }, },
+  { id: 'n2', position: { x: 0, y: 100 }, data: { label: 'Node 2 - Updated' } },
+  { id: 'n3', position: { x: 0, y: 200 }, data: { label: 'Node 3 - Updated' }, type: 'output',  style: { backgroundColor: '#6865A5', color: 'white' }, },
 ];
 const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' , animated: true }];
 
