@@ -14,16 +14,21 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { useCallback, useState } from 'react';
+import {UploadNode} from '@/components/UploadNode/UploadNode';
 
 let nodeId = 1;
 const getNodeId = (): string => `node-${nodeId++}`;
+
+const nodeTypes = {
+  upload: UploadNode,
+};
 
 const initialNodes: any[] = [
   {
     id: 'n1',
     position: { x: -200, y: 0 },
     data: { label: 'Node 1' },
-    type: 'input',
+    type: 'upload',
     sourcePosition: 'right',
     style: {
       width: 100,
@@ -38,7 +43,7 @@ const initialNodes: any[] = [
     data: { label: 'Node 2' },
     sourcePosition: 'right',
     targetPosition: 'left',
-    type: 'group',
+    // type: 'group',
   },
   {
     id: 'n2-1',
@@ -46,7 +51,7 @@ const initialNodes: any[] = [
     data: { label: 'Node 2' },
     sourcePosition: 'right',
     targetPosition: 'left',
-    parentId: 'n2-1',
+    // parentId: 'n2-1',
   },
     {
     id: 'n2-2',
@@ -54,7 +59,7 @@ const initialNodes: any[] = [
     data: { label: 'Node 2' },
     sourcePosition: 'right',
     targetPosition: 'left',
-    parentId: 'n2-2',
+    // parentId: 'n2-2',
   },
   {
     id: 'n2-3',
@@ -62,7 +67,7 @@ const initialNodes: any[] = [
     data: { label: 'Node 2' },
     sourcePosition: 'right',
     targetPosition: 'left',
-    parentId: 'n2-3',
+    // parentId: 'n2-3',
   },
   {
     id: 'n3',
@@ -89,7 +94,7 @@ export default function Workbench(): React.ReactElement {
   const [nodes, setNodes] = useState<Node[]>(initialNodes);
   const [edges, setEdges] = useState<Edge[]>(initialEdges);
 
-  /** 节点变化 */
+
   const onNodesChange = useCallback(
     (changes: NodeChange[]) => {
       setNodes((nds) => applyNodeChanges(changes, nds));
@@ -97,7 +102,6 @@ export default function Workbench(): React.ReactElement {
     []
   );
 
-  /** 边变化 */
   const onEdgesChange = useCallback(
     (changes: EdgeChange[]) => {
       setEdges((eds) => applyEdgeChanges(changes, eds));
@@ -105,7 +109,7 @@ export default function Workbench(): React.ReactElement {
     []
   );
 
-  /** 连线 */
+
   const onConnect = useCallback(
     (params: Connection) => {
       setEdges((eds) => addEdge(params, eds));
@@ -113,14 +117,10 @@ export default function Workbench(): React.ReactElement {
     []
   );
 
-  /**
-   * ✅ 点击节点 → 新增一个相连节点
-   */
   const onNodeClick = useCallback(
     (_event: React.MouseEvent, node: Node) => {
       const newNodeId = getNodeId();
 
-      /** 新节点 */
       const newNode: Node = {
         id: newNodeId,
         position: {
@@ -134,7 +134,6 @@ export default function Workbench(): React.ReactElement {
         targetPosition: 'left',
       };
 
-      /** 新边 */
       const newEdge: Edge = {
         id: `${node.id}-${newNodeId}`,
         source: node.id,
@@ -155,8 +154,9 @@ export default function Workbench(): React.ReactElement {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        onNodeClick={onNodeClick}
+        // onNodeClick={onNodeClick}
         fitView
+        nodeTypes={nodeTypes}
       >
         <Controls />
         <MiniMap />
