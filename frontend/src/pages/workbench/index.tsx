@@ -15,11 +15,9 @@ import {
 import '@xyflow/react/dist/style.css';
 import { useCallback, useState } from 'react';
 
-/** ---------- ID 生成 ---------- */
-let nodeId = 4;
+let nodeId = 1;
 const getNodeId = (): string => `node-${nodeId++}`;
 
-/** ---------- 初始 Nodes ---------- */
 const initialNodes: any[] = [
   {
     id: 'n1',
@@ -40,6 +38,31 @@ const initialNodes: any[] = [
     data: { label: 'Node 2' },
     sourcePosition: 'right',
     targetPosition: 'left',
+    type: 'group',
+  },
+  {
+    id: 'n2-1',
+    position: { x: 0, y: 150 },
+    data: { label: 'Node 2' },
+    sourcePosition: 'right',
+    targetPosition: 'left',
+    parentId: 'n2-1',
+  },
+    {
+    id: 'n2-2',
+    position: { x: 0, y: 200 },
+    data: { label: 'Node 2' },
+    sourcePosition: 'right',
+    targetPosition: 'left',
+    parentId: 'n2-2',
+  },
+  {
+    id: 'n2-3',
+    position: { x: 0, y: 250 },
+    data: { label: 'Node 2' },
+    sourcePosition: 'right',
+    targetPosition: 'left',
+    parentId: 'n2-3',
   },
   {
     id: 'n3',
@@ -53,7 +76,6 @@ const initialNodes: any[] = [
   },
 ];
 
-/** ---------- 初始 Edges ---------- */
 const initialEdges: Edge[] = [
   {
     id: 'n1-n2',
