@@ -1,0 +1,14 @@
+CREATE TABLE workflow (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(100) NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE workflow_version (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  workflow_id BIGINT NOT NULL,
+  version INT NOT NULL,
+  graph_json JSON NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (workflow_id) REFERENCES workflow(id)
+);
