@@ -14,8 +14,9 @@ import { useCallback, useState } from 'react';
 const initialNodes = [
   { id: 'n1', position: { x: 0, y: 0 }, data: { label: 'Node 1' }, type: 'input' },
   { id: 'n2', position: { x: 0, y: 100 }, data: { label: 'Node 2' } },
+  { id: 'n3', position: { x: 0, y: 200 }, data: { label: 'Node 3' }, type: 'output' },
 ];
-const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' }];
+const initialEdges = [{ id: 'n1-n2', source: 'n1', target: 'n2' , animated: true }];
 
 export default function App() {
   const [nodes, setNodes] = useState(initialNodes);
@@ -26,11 +27,11 @@ export default function App() {
     [],
   );
   const onEdgesChange = useCallback(
-    (changes: EdgeChange[]) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
+    (changes) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
     [],
   );
   const onConnect = useCallback(
-    (params: Connection) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
+    (params) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
     [],
   );
 
