@@ -11,9 +11,14 @@ function App() {
   return (
     <>
       <div className='app-ctx'>
-        <WorkflowVersion />
-        <div className='workbench-ctx'>
-          <Workbench />
+        <div  className='operator-ctx'>
+
+        </div>
+        <div className='workflow-ctx'>
+          <WorkflowVersion />
+          <div className='workbench-ctx'>
+            <Workbench />
+          </div>
         </div>
       </div>
     </>
