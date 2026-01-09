@@ -93,6 +93,28 @@ const initialEdges: Edge[] = [
 export default function Workbench(): React.ReactElement {
   const [nodes, setNodes] = useState<Node[]>(initialNodes);
   const [edges, setEdges] = useState<Edge[]>(initialEdges);
+  
+  // 处理文件上传的回调函数
+  const onUpload = useCallback((nodeId: string, file: File) => {
+    setNodes((nds) => {
+      return nds.map((node) => {
+        if (node.id === nodeId) {
+          // 更新节点数据，保存文件信息
+          return {
+            ...node,
+            data: {
+              ...node.data,
+              fileName: file.name,
+              fileType: file.type,
+              fileSize: file.size,
+              file: file, // 保存文件对象
+            },
+          };
+        }
+        return node;
+      });
+    });
+  }, []);
 
 
   const onNodesChange = useCallback(
@@ -149,7 +171,19 @@ export default function Workbench(): React.ReactElement {
   return (
     <div style={{ width: '100%', height: '100%' }}>
       <ReactFlow
-        nodes={nodes}
+        nodes={nodes.map((node) => {
+          // 为所有upload类型的节点添加onUpload回调函数
+          if (node.type === 'upload') {
+            return {
+              ...node,
+              data: {
+                ...node.data,
+                onUpload, // 添加onUpload回调
+              },
+            };
+          }
+          return node;
+        })}
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}

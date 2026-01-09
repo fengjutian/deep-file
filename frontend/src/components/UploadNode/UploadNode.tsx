@@ -9,6 +9,15 @@ export function UploadNode({ id, data }: NodeProps) {
     data?.onUpload?.(id, file);
   };
 
+  // 格式化文件大小
+  const formatFileSize = (bytes: number): string => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  };
+
   return (
     <div
       style={{
@@ -35,7 +44,14 @@ export function UploadNode({ id, data }: NodeProps) {
 
       {data?.fileName && (
         <div style={{ marginTop: 6, fontSize: 12 }}>
-          已上传：{data.fileName}
+          <div style={{ fontWeight: 500 }}>已上传文件：</div>
+          <div style={{ marginTop: 2 }}>名称：{data.fileName}</div>
+          {data.fileType && (
+            <div>类型：{data.fileType}</div>
+          )}
+          {data.fileSize && (
+            <div>大小：{formatFileSize(data.fileSize)}</div>
+          )}
         </div>
       )}
 
