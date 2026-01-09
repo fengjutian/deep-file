@@ -20,7 +20,7 @@ let nodeId = 4;
 const getNodeId = (): string => `node-${nodeId++}`;
 
 /** ---------- 初始 Nodes ---------- */
-const initialNodes: Node[] = [
+const initialNodes: any[] = [
   {
     id: 'n1',
     position: { x: -200, y: 0 },
@@ -63,8 +63,7 @@ const initialEdges: Edge[] = [
   },
 ];
 
-/** ---------- 主组件 ---------- */
-export default function App(): JSX.Element {
+export default function Workbench(): React.ReactElement {
   const [nodes, setNodes] = useState<Node[]>(initialNodes);
   const [edges, setEdges] = useState<Edge[]>(initialEdges);
 
