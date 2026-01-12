@@ -20,9 +20,6 @@ def get_db():
         db.close()
 
 
-# ===============================
-# 创建工作流（初始版本 v1）
-# ===============================
 @router.post("/")
 def create_workflow(
     data: WorkflowCreate,
