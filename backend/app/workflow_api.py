@@ -30,9 +30,9 @@ def create_workflow(
     db.flush()  # 拿到 workflow.id
 
     version = WorkflowVersion(
-        workflow_id=workflow.id,
-        version=1,
-        graph_json=data.graph
+      workflow_id=workflow.id,
+      version=1,
+      graph_json=data.graph_json
     )
     db.add(version)
     db.commit()
